@@ -14,7 +14,7 @@ const Stack : any = createNativeStackNavigator()
 
 
 export default function App() {
-  const [inputValue,setInputValue]=useState("")
+  // const [inputValue,setInputValue]=useState("")
   return (
     <>
         <StatusBar style="auto" />
@@ -22,7 +22,8 @@ export default function App() {
        
     
      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home">
+        <Stack.Navigator 
+        initialRouteName="Home">
           <Stack.Screen
             name="Home" component={Home}/>  
              <Stack.Screen
