@@ -1,12 +1,12 @@
 
-import { View, TouchableOpacity, StyleSheet, Text, FlatList, Image } from "react-native"
+import { View,  StyleSheet, Text, FlatList, Image } from "react-native"
 import { Button } from "react-native-paper";
 import axios from "axios";
 import { useEffect, useState } from 'react';
 
 
 const CountryScreen = ({ navigation, route }: any) => {
-    const [countryData, setCountryDate] = useState<any>([])
+    const [countryData, setCountryData] = useState<any>([])
     const [error, setError] = useState(false)
     const countryName = route.params.countryName
 
@@ -17,16 +17,19 @@ const CountryScreen = ({ navigation, route }: any) => {
     const getCountryDetails = () => {
 
         countryAPI.get(`v3.1/name/${countryName}`)
-            .then((response: any) => setCountryDate(response.data))
+            .then((response: any) => setCountryData(response.data))
             .catch((error: any) => setError(true))
     }
 
     useEffect(() => getCountryDetails(), [])
-    const handleNavigation = () => {
-
-        navigation.navigate("CapitalWeather")
-
+    const handleNavigation = (capital:string) => {
+       console.log(capital)
+        navigation.navigate("CapitalWeather",{capital})
     }
+    
+    console.log("abc",countryData)
+    console.log("weather",countryData.capital)
+   
     
     return (
 
@@ -44,17 +47,21 @@ const CountryScreen = ({ navigation, route }: any) => {
                                 <Text style ={styles.text}>latitude : {item?.item?.latlng[0]}</Text>
                                 <Text style ={styles.text}>longitude : {item?.item?.latlng[1]}</Text>
                                 <Image style = {styles.image} source={{uri: item?.item?.flags.png}}/>
+
+                                <Button mode='contained'
+                                 style ={styles.capButton}
+                                 uppercase={false}
+                                 onPress={()=>{handleNavigation(item?.item?.capital[0])}}>
+                                 Capital Weather
+                                </Button>
+
                             </View>
                         )
                     }}
-                    keyExtractor={(item : any) => item.area}
+                    keyExtractor={(item : any) => Math.random().toString(16).slice(2)}
                 />
             </View>
-            <Button mode='contained'
-                style ={styles.capButton}
-                uppercase={false}
-                onPress={handleNavigation}>Capital Weather</Button>
-
+          
         </View>
 
     )
@@ -84,9 +91,11 @@ const styles = StyleSheet.create({
         width : 200,
         justifyContent : "center",
         marginLeft : 100,
-        backgroundColor :'#6d94ed'
+        backgroundColor :'#6d94ed',
+        marginTop: 30
        
         
     }
+    
 })
 export default CountryScreen;

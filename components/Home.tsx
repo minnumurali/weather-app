@@ -4,11 +4,11 @@ import { Button, TextInput } from 'react-native-paper';
 
 
 export default function Home({navigation}: any) {
-    const[state,setState]=useState(false)
-   const [countryName,setCountryName] = useState("")
+  
+   const [countryName,setCountryName] = useState<any>("")
     const handleNavigation =()=> {
       
-     console.log(countryName)       
+    //  console.log(countryName)       
         navigation.navigate("CountryDetails",{countryName})
         
     }
@@ -17,13 +17,15 @@ export default function Home({navigation}: any) {
         <View style ={styles.container}>
             
            <TextInput
-             style={styles.input}
+            style={styles.input}
             mode='outlined'
             value = {countryName}
             onChangeText = {setCountryName}
-            label = "Enter country"/>
-            <Button mode='contained'
-            style = {styles.button}
+            placeholder = "Enter country"
+            testID="country"/>
+            <Button 
+             mode='contained'
+             style = {styles.button}
              uppercase = {false}
              disabled = {!countryName}
              onPress = {handleNavigation}>Submit</Button>
@@ -40,11 +42,14 @@ const styles = StyleSheet.create({
     input :{
         height : 60,
         width : "50%",
-        borderRadius : 10
+       
+        
     },
     button : {
         marginTop : 50,
-        backgroundColor :'#6d94ed'
+        backgroundColor :'#6d94ed',
+        borderRadius : 20,
+      
     }
 });
   
