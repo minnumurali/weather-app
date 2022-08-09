@@ -26,13 +26,14 @@ const CapitalWeather = ({ route }: any) => {
     return (
 
         <View style={{ flex: 1 }}>
-                
+                <Text style={styles.header}>Capital Weather</Text>
                   
                             <View style ={styles.listView}>
                                 <Text style ={styles.text}>temperature: {capitalData[0]?.current?.temperature}</Text>
                                 <Text style ={styles.text}>wind_speed : {capitalData[0]?.current?.wind_speed}</Text>
                                 <Text style ={styles.text}>precip : {capitalData[0]?.current?.precip}</Text>
-                                <Image style = {styles.image} source={{uri:capitalData[0]?.current?.weather_icons[0]}}/>
+                                <Text style ={styles.text}> Weather Icon :<Image style = {styles.image} source={{uri:capitalData[0]?.current?.weather_icons[0]}}/></Text>
+                                
                             </View>
                         
                     
@@ -45,13 +46,31 @@ const styles = StyleSheet.create({
 
     container: {
         flex: 1,
-        justifyContent :"center",
-        alignItems : "center",
+        paddingHorizontal:15,
+        paddingVertical:25,
+        flexDirection:"row",
+        justifyContent:"space-between",
     },
+    header:{
+        fontSize: 20,
+        fontStyle:"normal",
+        fontWeight:"bold",
+        marginLeft : 77,
+        padding : 10
+       
+         },
 
     text :{
-      fontSize : 16,
-      marginBottom : 20
+        fontSize : 16,
+        marginBottom : 20,
+        paddingHorizontal:70,
+        
+    //    borderBottomWidth:1,
+    //    borderBottomColor:"#1e1e1e1e",
+      //  flexDirection:"column",
+       
+      //  justifyContent :"space-around",
+       alignItems : "center"
     },
     listView:{
         padding :20
@@ -59,6 +78,10 @@ const styles = StyleSheet.create({
     image:{
         width : 200,
         height : 150,
+        width : 30,
+        height : 30,
+        resizeMode : "fit",
+        paddingLeft:70
         // resizeMode : "fit"
     }
 })
